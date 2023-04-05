@@ -7,6 +7,7 @@ import (
 	inimodel "github.com/stefanymelda/be_kuesioner/model"
 	inimodule "github.com/stefanymelda/be_kuesioner/module"
 	inimodullatihan "github.com/indrariksa/be_presensi/module"
+	// inimodultugas "github.com/stefanymelda/be_kuesioner/module"
 	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
 	"github.com/stefanymelda/stefanyapp/config"
@@ -34,7 +35,7 @@ func GetPresensi(c *fiber.Ctx) error {
 }
 
 func GetKuesioner(c *fiber.Ctx) error {
-	ps := inimodule.GetKuesionerFromStatus("selesai", config.Ulbimongoconn, "kuesioner")
+	ps := inimodule.GetKuesionerFromStatus("done", config.Ulbimongoconn, "kuesioner")
 	return c.JSON(ps)
 }
 
@@ -43,18 +44,18 @@ func GetResponden(c *fiber.Ctx) error {
 	return c.JSON(ps)
 }
 
-func GetJamPengisian(c *fiber.Ctx) error {
-	ps := inimodule.GetJamPengisianFromDurasi(2, config.Ulbimongoconn, "jampengisian")
-	return c.JSON(ps)
-}
+// func GetJamPengisian(c *fiber.Ctx) error {
+// 	ps := inimodule.GetJamPengisianFromDurasi(2, config.Ulbimongoconn, "jampengisian")
+// 	return c.JSON(ps)
+// }
 
 func GetLokasi(c *fiber.Ctx) error {
 	ps := inimodule.GetLokasiFromNama("ULBI", config.Ulbimongoconn, "lokasi")
 	return c.JSON(ps)
 }
 
-func GetAllKuesioner(c *fiber.Ctx) error {
-	ps := inimodule.GetAllKuesionerFromEmail("stefanymelda01@gmail.com", config.Ulbimongoconn, "kuesioner")
+func GetAllKuesionerOld(c *fiber.Ctx) error {
+	ps := inimodule.GetAllKuesionerFromEmail("arykann20@gmail.com", config.Ulbimongoconn, "kuesioner")
 	return c.JSON(ps)
 }
 
@@ -89,8 +90,7 @@ func InsertDataResponden(c *fiber.Ctx) error {
     responden.Jenis_kelamin,
     responden.Usia,
     responden.Email,
-	responden.Phone_number,
-	responden.Hari_pengisian)
+	responden.Phone_number)
 
 	return c.JSON(map[string]interface{}{
 		"status":      http.StatusOK,
@@ -99,23 +99,23 @@ func InsertDataResponden(c *fiber.Ctx) error {
 	})
 }
 
-func InsertDataJamPengisian(c *fiber.Ctx) error {
-	db := config.Ulbimongoconn
-	var jampengisian inimodel.JamPengisian
-	if err := c.BodyParser(&jampengisian); err != nil {
-		return err
-	}
-	insertedID := inimodule.InsertJamPengisian(db, "jampengisian",
-	jampengisian.Durasi,
-	jampengisian.Jam_mulai,
-	jampengisian.Jam_selesai,
-	jampengisian.Gmt)
-	return c.JSON(map[string]interface{}{
-		"status":      http.StatusOK,
-		"message":     "Data berhasil disimpan.",
-		"inserted_id": insertedID,
-	})
-}
+// func InsertDataJamPengisian(c *fiber.Ctx) error {
+// 	db := config.Ulbimongoconn
+// 	var jampengisian inimodel.JamPengisian
+// 	if err := c.BodyParser(&jampengisian); err != nil {
+// 		return err
+// 	}
+// 	insertedID := inimodule.InsertJamPengisian(db, "jampengisian",
+// 	jampengisian.Durasi,
+// 	jampengisian.Jam_mulai,
+// 	jampengisian.Jam_selesai,
+// 	jampengisian.Deskripsi)
+// 	return c.JSON(map[string]interface{}{
+// 		"status":      http.StatusOK,
+// 		"message":     "Data berhasil disimpan.",
+// 		"inserted_id": insertedID,
+// 	})
+// }
 
 func InsertDataLokasi(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
@@ -183,5 +183,10 @@ func GetPresensiID(c *fiber.Ctx) error {
 			"message": fmt.Sprintf("Error retrieving data for id %s", id),
 		})
 	}
+	return c.JSON(ps)
+}
+
+func GetAllKuesioner(c *fiber.Ctx) error {
+	ps := inimodule.GetAllKuesioner(config.Ulbimongoconn, "kuesioner")
 	return c.JSON(ps)
 }
