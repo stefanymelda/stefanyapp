@@ -7,6 +7,8 @@ import (
 	inimodel "github.com/stefanymelda/be_kuesioner/model"
 	inimodule "github.com/stefanymelda/be_kuesioner/module"
 	inimodullatihan "github.com/indrariksa/be_presensi/module"
+	inimodel "github.com/indrariksa/be_presensi/model"
+	inimodule "github.com/indrariksa/be_presensi/module"
 	// inimodultugas "github.com/stefanymelda/be_kuesioner/module"
 	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
@@ -189,4 +191,33 @@ func GetPresensiID(c *fiber.Ctx) error {
 func GetAllKuesioner(c *fiber.Ctx) error {
 	ps := inimodule.GetAllKuesioner(config.Ulbimongoconn, "kuesioner")
 	return c.JSON(ps)
+}
+
+func InsertData(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	var presensi inimodel.Presensi
+	if err := c.BodyParser(&presensi); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	insertedID, err := inimodul.InsertPresensi(db, "presensi",
+		presensi.Longitude,
+		presensi.Latitude,
+		presensi.Location,
+		presensi.Phone_number,
+		presensi.Checkin,
+		presensi.Biodata)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":      http.StatusOK,
+		"message":     "Data berhasil disimpan.",
+		"inserted_id": insertedID,
+	})
 }
