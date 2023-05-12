@@ -7,8 +7,8 @@ import (
 	inimodel "github.com/stefanymelda/be_kuesioner/model"
 	inimodule "github.com/stefanymelda/be_kuesioner/module"
 	inimodullatihan "github.com/indrariksa/be_presensi/module"
-	initumodel "github.com/indrariksa/be_presensi/model"
-	initumodule "github.com/indrariksa/be_presensi/module"
+	tuhmodel "github.com/indrariksa/be_presensi/model"
+	tuhmodule "github.com/indrariksa/be_presensi/module"
 	// inimodultugas "github.com/stefanymelda/be_kuesioner/module"
 	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
@@ -195,14 +195,14 @@ func GetAllKuesioner(c *fiber.Ctx) error {
 
 func InsertData(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
-	var presensi initumodel.Presensi
+	var presensi tuhmodel.Presensi
 	if err := c.BodyParser(&presensi); err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
 			"message": err.Error(),
 		})
 	}
-	insertedID, err := initumodul.InsertPresensi(db, "presensi",
+	insertedID, err := tuhmodul.InsertPresensi(db, "presensi",
 		presensi.Longitude,
 		presensi.Latitude,
 		presensi.Location,
