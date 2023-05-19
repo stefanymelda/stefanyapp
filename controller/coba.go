@@ -285,7 +285,7 @@ func DeletePresensiByID(c *fiber.Ctx) error {
 		})
 	}
 
-	err = tuhmodulloh.DeletePresensiByID(objID, config.Ulbimongoconn, "presensi")
+	err = tuhmoduleloh.DeletePresensiByID(objID, config.Ulbimongoconn, "presensi")
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
