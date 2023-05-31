@@ -16,6 +16,18 @@ import (
 	_ "github.com/stefanymelda/stefanyapp/docs"
 )
 
+// @title TES SWAG
+// @version 1.0
+// @description This is a sample server.
+
+
+// @contact.name API Support
+// @contact.url https://github.com/stefanymelda
+// @contact.email 1214026@std.ulbi.ac.id
+
+// @host jaehyun.herokuapp.com
+// @BasePath /
+// @schemes https http
 func main() {
 	go whatsauth.RunHub()
 	site := fiber.New(config.Iteung)
