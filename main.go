@@ -13,7 +13,7 @@ import (
 	"github.com/stefanymelda/stefanyapp/url"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/stefanymelda/stefanyapp/docs"
+	_ "github.com/stefanymelda/stefanyapp/docs"
 )
 
 func main() {
