@@ -1,7 +1,20 @@
 {
+    "schemes": [
+        "https",
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a sample server.",
+        "title": "TES SWAG",
+        "contact": {
+            "name": "API Support",
+            "url": "https://github.com/stefanymelda",
+            "email": "1214026@std.ulbi.ac.id"
+        },
+        "version": "1.0"
     },
+    "host": "jaehyun.herokuapp.com",
+    "basePath": "/",
     "paths": {}
 }
