@@ -25,5 +25,5 @@ func Web(page *fiber.App) {
 	page.Put("/upd/:id", controller.UpdateData)
 	page.Delete("/delete/:id", controller.DeletePresensiByID)
 	page.Get("/docs/*", swagger.HandlerDefault)
-	page.Post("/ins1", controller.InsertData)
+	page.Post("/ins1", controller.InsertDataKuesioner)
 }
