@@ -6,6 +6,8 @@ import (
 	"github.com/aiteung/musik"
 	inimodel "github.com/stefanymelda/be_kuesioner/model"
 	inimodule "github.com/stefanymelda/be_kuesioner/module"
+	// modelbaru "github.com/stefanymelda/be_kuesioner/model"
+	// modulebaru "github.com/stefanymelda/be_kuesioner/module"
 	inimodullatihan "github.com/indrariksa/be_presensi/module"
 	tuhmodelloh "github.com/indrariksa/be_presensi/model"
 	tuhmoduleloh "github.com/indrariksa/be_presensi/module"
@@ -74,6 +76,12 @@ func InsertDataKuesioner(c *fiber.Ctx) error {
 	kuesioner.Email, 
 	kuesioner.Status,
 	kuesioner.Biodata)
+	// if err != nil {
+	// 	return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+	// 		"status":  http.StatusInternalServerError,
+	// 		"message": err.Error(),
+	// 	})
+	// }
 	return c.JSON(map[string]interface{}{
 		"status":      http.StatusOK,
 		"message":     "Data berhasil disimpan.",
@@ -352,3 +360,32 @@ func DeletePresensiByID(c *fiber.Ctx) error {
 		"message": fmt.Sprintf("Data with id %s deleted successfully", id),
 	})
 }
+
+// func InsertDataKuesioner2(c *fiber.Ctx) error {
+// 	db := config.Ulbimongoconn
+// 	var kuesioner inimodel.Kuesioner
+// 	if err := c.BodyParser(&kuesioner); err != nil {
+// 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+// 			"status":  http.StatusInternalServerError,
+// 			"message": err.Error(),
+// 		})
+// 	}
+// 	insertedID, err := inimodule.InsertDataKuesioner2(db, "kuesioner",
+// 		kuesioner.Latitude,
+// 		kuesioner.Longitude,
+// 		kuesioner.Location,
+// 		kuesioner.Email,
+// 		kuesioner.Status,
+// 		kuesioner.Biodata)
+// 	if err != nil {
+// 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+// 			"status":  http.StatusInternalServerError,
+// 			"message": err.Error(),
+// 		})
+// 	}
+// 	return c.Status(http.StatusOK).JSON(fiber.Map{
+// 		"status":      http.StatusOK,
+// 		"message":     "Data berhasil disimpan.",
+// 		"inserted_id": insertedID,
+// 	})
+// }
