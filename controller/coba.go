@@ -76,12 +76,12 @@ func InsertDataKuesioner(c *fiber.Ctx) error {
 	kuesioner.Email, 
 	kuesioner.Status,
 	kuesioner.Biodata)
-	// if err != nil {
-	// 	return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-	// 		"status":  http.StatusInternalServerError,
-	// 		"message": err.Error(),
-	// 	})
-	// }
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
 	return c.JSON(map[string]interface{}{
 		"status":      http.StatusOK,
 		"message":     "Data berhasil disimpan.",
