@@ -69,7 +69,7 @@ func InsertDataKuesioner(c *fiber.Ctx) error {
 	if err := c.BodyParser(&kuesioner); err != nil {
 		return err
 	}
-	insertedID := inimodule.InsertKuesioner(db, "kuesioner",
+	insertedID, err := inimodule.InsertKuesioner(db, "kuesioner",
 	kuesioner.Latitude,
 	kuesioner.Longitude, 
 	kuesioner.Location, 
