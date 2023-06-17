@@ -509,7 +509,7 @@ func GetKuesionerID(c *fiber.Ctx) error {
 			"message": "Invalid id parameter",
 		})
 	}
-	ps, err := inimodule2.GetKuesionerFromID(objID, config.Ulbimongoconn, "kuesioner")
+	ps, err := inimodule.GetKuesionerFromID(objID, config.Ulbimongoconn, "kuesioner")
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return c.Status(http.StatusNotFound).JSON(fiber.Map{
