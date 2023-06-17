@@ -26,4 +26,6 @@ func Web(page *fiber.App) {
 	page.Delete("/delete/:id", controller.DeletePresensiByID)
 	page.Get("/docs/*", swagger.HandlerDefault)
 	page.Post("/ins1", controller.InsertDataKuesioner)
+	page.Put("/update/:id", controller.UpdateDataK)
+	page.Delete("/dlt/:id", controller.DeleteKuesionerByID)
 }
