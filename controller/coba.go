@@ -413,10 +413,6 @@ func GetPresensiID(c *fiber.Ctx) error {
 	return c.JSON(ps)
 }
 
-func GetAllKuesioner(c *fiber.Ctx) error {
-	ps := inimodule.GetAllKuesioner(config.Ulbimongoconn, "kuesioner")
-	return c.JSON(ps)
-}
 
 // InsertData godoc
 // @Summary Insert data presensi.
