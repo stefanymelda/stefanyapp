@@ -12,7 +12,7 @@ import (
 	tuhmodelloh "github.com/indrariksa/be_presensi/model"
 	tuhmoduleloh "github.com/indrariksa/be_presensi/module"
 	// inimodultugas "github.com/stefanymelda/be_kuesioner/module"
-	cek "github.com/aiteung/presensi"
+	// cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
 	"github.com/stefanymelda/stefanyapp/config"
 	"net/http"
