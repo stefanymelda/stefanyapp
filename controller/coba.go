@@ -12,7 +12,7 @@ import (
 	tuhmodelloh "github.com/indrariksa/be_presensi/model"
 	tuhmoduleloh "github.com/indrariksa/be_presensi/module"
 	// inimodultugas "github.com/stefanymelda/be_kuesioner/module"
-	// cek "github.com/aiteung/presensi"
+	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
 	"github.com/stefanymelda/stefanyapp/config"
 	"net/http"
@@ -33,10 +33,10 @@ func Homepage(c *fiber.Ctx) error {
 	return c.JSON(ipaddr)
 }
 
-// func GetPresensi(c *fiber.Ctx) error {
-// 	ps := cek.GetPresensiCurrentMonth(config.Ulbimongoconn)
-// 	return c.JSON(ps)
-// }
+func GetPresensi(c *fiber.Ctx) error {
+	ps := cek.GetPresensiCurrentMonth(config.Ulbimongoconn)
+	return c.JSON(ps)
+}
 
 func GetKuesioner(c *fiber.Ctx) error {
 	ps := inimodule.GetKuesionerFromStatus("done", config.Ulbimongoconn, "kuesioner")
