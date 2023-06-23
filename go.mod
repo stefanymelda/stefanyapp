@@ -10,7 +10,7 @@ require (
 	github.com/gofiber/swagger v0.1.12
 	github.com/gofiber/websocket/v2 v2.1.4
 	github.com/indrariksa/be_presensi v0.0.12
-	github.com/stefanymelda/be_kuesioner v0.0.9
+	github.com/stefanymelda/be_kuesioner v0.0.11
 	github.com/swaggo/swag v1.16.1
 	github.com/whatsauth/whatsauth v0.1.89
 	go.mongodb.org/mongo-driver v1.11.3

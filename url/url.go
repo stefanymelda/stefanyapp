@@ -30,4 +30,5 @@ func Web(page *fiber.App) {
 	page.Put("/update/:id", controller.UpdateDataK)
 	page.Delete("/dlt/:id", controller.DeleteKuesionerByID)
 	page.Get("/docskuesioner/*", swagger.HandlerDefault)
+	page.Post("/loginadm", controller.LogAdmin)
 }

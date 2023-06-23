@@ -355,6 +355,42 @@ func DeleteKuesionerByID(c *fiber.Ctx) error {
 	})
 }
 
+//LOGAdmin
+
+func LogAdmin(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	var admin inimodel.Admin
+	if err := c.BodyParser(&admin); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	authenticated, err := inimodule.LogAdmin(db, "admin", admin.Username, admin.Password)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	if authenticated {
+		return c.Status(http.StatusOK).JSON(fiber.Map{
+			"status":  http.StatusOK,
+			"message": "Yay Login Admin successful",
+		})
+	}
+	
+	return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+		"status":  http.StatusUnauthorized,
+		"message": "Oops.. Login Admin Invalid",
+	})
+}
+
+
+//ENDLOGAdmin
+
 //ENDTugasBesar
 
 // GetAllPresensi godoc
