@@ -250,7 +250,7 @@ func InsertDataKuesioner(c *fiber.Ctx) error {
 	}
 	return c.JSON(map[string]interface{}{
 		"status":      http.StatusOK,
-		"message":     "Data berhasil disimpan.",
+		"message":     "Data Saved Successfully",
 		"inserted_id": insertedID,
 	})
 }
@@ -309,7 +309,7 @@ func UpdateDataK(c *fiber.Ctx) error {
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":  http.StatusOK,
-		"message": "Data successfully updated",
+		"message": "Data Successfully Updated",
 	})
 }
 
@@ -345,13 +345,13 @@ func DeleteKuesionerByID(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
-			"message": fmt.Sprintf("Error deleting data for id %s", id),
+			"message": fmt.Sprintf("Error Deleting Data for ID %s", id),
 		})
 	}
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":  http.StatusOK,
-		"message": fmt.Sprintf("Data with id %s deleted successfully", id),
+		"message": fmt.Sprintf("Data with ID %s Deleted Successfully", id),
 	})
 }
 
