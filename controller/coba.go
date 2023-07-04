@@ -378,13 +378,13 @@ func LogAdmin(c *fiber.Ctx) error {
 	if authenticated {
 		return c.Status(http.StatusOK).JSON(fiber.Map{
 			"status":  http.StatusOK,
-			"message": "Yay Login Admin successful",
+			"message": "Yay! Login Admin Berhasil:)",
 		})
 	}
 	
 	return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 		"status":  http.StatusUnauthorized,
-		"message": "Oops.. Login Admin Invalid",
+		"message": "Oops.. Login Admin Invalid:(",
 	})
 }
 
