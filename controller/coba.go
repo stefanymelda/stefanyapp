@@ -3,19 +3,23 @@ package controller
 import (
 	"errors"
 	"fmt"
+
 	"github.com/aiteung/musik"
 	inimodel "github.com/stefanymelda/be_kuesioner/model"
 	inimodule "github.com/stefanymelda/be_kuesioner/module"
+
 	// modelbaru "github.com/stefanymelda/be_kuesioner/model"
 	// modulebaru "github.com/stefanymelda/be_kuesioner/module"
-	inimodullatihan "github.com/indrariksa/be_presensi/module"
 	tuhmodelloh "github.com/indrariksa/be_presensi/model"
+	inimodullatihan "github.com/indrariksa/be_presensi/module"
 	tuhmoduleloh "github.com/indrariksa/be_presensi/module"
+
 	// inimodultugas "github.com/stefanymelda/be_kuesioner/module"
+	"net/http"
+
 	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
 	"github.com/stefanymelda/stefanyapp/config"
-	"net/http"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -250,7 +254,7 @@ func InsertDataKuesioner(c *fiber.Ctx) error {
 	}
 	return c.JSON(map[string]interface{}{
 		"status":      http.StatusOK,
-		"message":     "Data Saved Successfully",
+		"message":     "SUCCESS!! Data has been saved.",
 		"inserted_id": insertedID,
 	})
 }
@@ -309,7 +313,7 @@ func UpdateDataK(c *fiber.Ctx) error {
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":  http.StatusOK,
-		"message": "Data Successfully Updated",
+		"message": "Updated Data Success✅",
 	})
 }
 
@@ -351,7 +355,7 @@ func DeleteKuesionerByID(c *fiber.Ctx) error {
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":  http.StatusOK,
-		"message": fmt.Sprintf("Data with ID %s Deleted Successfully", id),
+		"message": fmt.Sprintf("Deleted! Data with ID %s has been deleted.", id),
 	})
 }
 
@@ -378,13 +382,13 @@ func LogAdmin(c *fiber.Ctx) error {
 	if authenticated {
 		return c.Status(http.StatusOK).JSON(fiber.Map{
 			"status":  http.StatusOK,
-			"message": "Yay! Login Admin Berhasil:)",
+			"message": "Login Success.. WELCOME ADMIN😃",
 		})
 	}
 	
 	return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 		"status":  http.StatusUnauthorized,
-		"message": "Oops.. Login Admin Invalid:(",
+		"message": "Oops Something Wrong.. Login Invalid😱",
 	})
 }
 
