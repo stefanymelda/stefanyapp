@@ -32,4 +32,8 @@ func Web(page *fiber.App) {
 	page.Get("/docskuesioner/*", swagger.HandlerDefault)
 	page.Post("/loginadm", controller.LogAdmin)
 	page.Get("/survey", controller.GetAllSurvey)
+	page.Post("/ins2", controller.InsertDataS)
+	page.Put("/updatesurvey/:id", controller.UpdateDataS)
+	page.Delete("/deletes/:id", controller.DeleteSurveyByID)
+	page.Get("/docssurvey/*", swagger.HandlerDefault)
 }

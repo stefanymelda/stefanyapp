@@ -359,6 +359,149 @@ func DeleteKuesionerByID(c *fiber.Ctx) error {
 	})
 }
 
+// GetAllSurvey godoc
+// @Summary Get All Data Survey.
+// @Description Mengambil semua data survey.
+// @Tags Survey
+// @Accept json
+// @Produce json
+// @Success 200 {object} Survey
+// @Router /survey [get]
+func GetAllSurvey(c *fiber.Ctx) error {
+	ps := inimodule.GetAllSurvey(config.Ulbimongoconn, "survey")
+	return c.JSON(ps)
+}
+
+// InsertDataSurvey godoc
+// @Summary Insert data survey.
+// @Description Input data survey.
+// @Tags Survey
+// @Accept json
+// @Produce json
+// @Param request body Survey true "Payload Body [RAW]"
+// @Success 200 {object} Survey
+// @Failure 400
+// @Failure 500
+// @Router /ins2 [post]
+func InsertDataS(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	var survey inimodel.Survey
+	if err := c.BodyParser(&survey); err != nil {
+		return err
+	}
+	insertedID, err := inimodule.InsertSurvey1(db, "survey",
+	survey.Kode,
+	survey.Title, 
+	survey.Soal) 
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	return c.JSON(map[string]interface{}{
+		"status":      http.StatusOK,
+		"message":     "SUCCESS!! Data has been saved.",
+		"inserted_id": insertedID,
+	})
+}
+
+// UpdateDataS godoc
+// @Summary Update data survey.
+// @Description Ubah data survey.
+// @Tags Survey
+// @Accept json
+// @Produce json
+// @Param id path string true "Masukan ID"
+// @Param request body Survey true "Payload Body [RAW]"
+// @Success 200 {object} Survey
+// @Failure 400
+// @Failure 500
+// @Router /updatesurvey/{id} [put]
+func UpdateDataS(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+
+	// Get the ID from the URL parameter
+	id := c.Params("id")
+
+	// Parse the ID into an ObjectID
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	// Parse the request body into a Presensi object
+	var survey inimodel.Survey
+	if err := c.BodyParser(&survey); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	// Call the UpdatePresensi function with the parsed ID and the Presensi object
+	err = inimodule.UpdateSurvey(db, objectID,
+		"survey",
+		survey.Kode,
+		survey.Title, 
+		survey.Soal)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":  http.StatusOK,
+		"message": "Updated Data Success✅",
+	})
+}
+
+// DeleteSurveyByID godoc
+// @Summary Delete data survey.
+// @Description Hapus data survey.
+// @Tags Survey
+// @Accept json
+// @Produce json
+// @Param id path string true "Masukan ID"
+// @Success 200
+// @Failure 400
+// @Failure 500
+// @Router /deletes/{id} [delete]
+func DeleteSurveyByID(c *fiber.Ctx) error {
+	id := c.Params("id")
+	if id == "" {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": "Wrong parameter",
+		})
+	}
+
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"status":  http.StatusBadRequest,
+			"message": "Invalid id parameter",
+		})
+	}
+
+	err = inimodule.DeleteSurveyByID(objID, config.Ulbimongoconn, "survey")
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": fmt.Sprintf("Error Deleting Data for ID %s", id),
+		})
+	}
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":  http.StatusOK,
+		"message": fmt.Sprintf("Deleted! Data with ID %s has been deleted.", id),
+	})
+}
 //LOGAdmin
 
 func LogAdmin(c *fiber.Ctx) error {
@@ -390,19 +533,6 @@ func LogAdmin(c *fiber.Ctx) error {
 		"status":  http.StatusUnauthorized,
 		"message": "Oops Something Wrong.. Login Invalid😱",
 	})
-}
-
-// GetAllSurvey godoc
-// @Summary Get All Data Survey.
-// @Description Mengambil semua data survey.
-// @Tags Survey
-// @Accept json
-// @Produce json
-// @Success 200 {object} Survey
-// @Router /survey [get]
-func GetAllSurvey(c *fiber.Ctx) error {
-	ps := inimodule.GetAllSurvey(config.Ulbimongoconn, "survey")
-	return c.JSON(ps)
 }
 
 
