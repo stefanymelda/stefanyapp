@@ -4,8 +4,8 @@ import (
 	"github.com/stefanymelda/stefanyapp/controller"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/websocket/v2"
 	"github.com/gofiber/swagger" // swagger handler
+	"github.com/gofiber/websocket/v2"
 )
 
 func Web(page *fiber.App) {
@@ -31,4 +31,5 @@ func Web(page *fiber.App) {
 	page.Delete("/dlt/:id", controller.DeleteKuesionerByID)
 	page.Get("/docskuesioner/*", swagger.HandlerDefault)
 	page.Post("/loginadm", controller.LogAdmin)
+	page.Get("/survey", controller.GetAllSurvey)
 }

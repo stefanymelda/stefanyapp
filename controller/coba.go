@@ -392,6 +392,19 @@ func LogAdmin(c *fiber.Ctx) error {
 	})
 }
 
+// GetAllSurvey godoc
+// @Summary Get All Data Survey.
+// @Description Mengambil semua data survey.
+// @Tags Survey
+// @Accept json
+// @Produce json
+// @Success 200 {object} Survey
+// @Router /survey [get]
+func GetAllSurvey(c *fiber.Ctx) error {
+	ps := inimodule.GetAllSurvey(config.Ulbimongoconn, "survey")
+	return c.JSON(ps)
+}
+
 
 //ENDLOGAdmin
 
