@@ -319,7 +319,7 @@ func UpdateDataK(c *fiber.Ctx) error {
 
 // DeleteKuesionerByID godoc
 // @Summary Delete data kuesioner.
-// @Description Hapus data kuesioner.
+// @Description Hapus data kuesioner tes.
 // @Tags Quesioner
 // @Accept json
 // @Produce json
