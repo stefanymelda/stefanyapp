@@ -25,16 +25,15 @@ func Web(page *fiber.App) {
 	page.Post("/ins", controller.InsertData)
 	page.Put("/upd/:id", controller.UpdateData)
 	page.Delete("/delete/:id", controller.DeletePresensiByID)
-	page.Get("/docs/*", swagger.HandlerDefault)
 	page.Post("/ins1", controller.InsertDataKuesioner)
 	page.Put("/update/:id", controller.UpdateDataK)
 	page.Delete("/dlt/:id", controller.DeleteKuesionerByID)
-	page.Get("/docskuesioner/*", swagger.HandlerDefault)
 	page.Post("/loginadm", controller.LogAdmin)
 	page.Get("/survey", controller.GetAllSurvey)
 	page.Get("/survey/:id", controller.GetSurveyID)
 	page.Post("/ins2", controller.InsertDataS)
 	page.Put("/updatesurvey/:id", controller.UpdateDataS)
 	page.Delete("/deletes/:id", controller.DeleteSurveyByID)
-
+	
+	page.Get("/docs/*", swagger.HandlerDefault)
 }
