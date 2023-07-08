@@ -20,6 +20,76 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/delete/{id}": {
+            "delete": {
+                "description": "Hapus data presensi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Presensi"
+                ],
+                "summary": "Delete data presensi.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Masukan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/deletes/{id}": {
+            "delete": {
+                "description": "Hapus data survey.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey"
+                ],
+                "summary": "Delete data survey.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Masukan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/dlt/{id}": {
             "delete": {
                 "description": "Hapus data kuesioner.",
@@ -45,6 +115,46 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/ins": {
+            "post": {
+                "description": "Input data presensi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Presensi"
+                ],
+                "summary": "Insert data presensi.",
+                "parameters": [
+                    {
+                        "description": "Payload Body [RAW]",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.Presensi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Presensi"
+                        }
                     },
                     "400": {
                         "description": "Bad Request"
@@ -84,6 +194,46 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/controller.Kuesioner"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/ins2": {
+            "post": {
+                "description": "Input data survey.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey"
+                ],
+                "summary": "Insert data survey.",
+                "parameters": [
+                    {
+                        "description": "Payload Body [RAW]",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.Survey"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Survey"
                         }
                     },
                     "400": {
@@ -159,6 +309,181 @@ const docTemplate = `{
                 }
             }
         },
+        "/presensi": {
+            "get": {
+                "description": "Mengambil semua data presensi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Presensi"
+                ],
+                "summary": "Get All Data Presensi.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Presensi"
+                        }
+                    }
+                }
+            }
+        },
+        "/presensi/{id}": {
+            "get": {
+                "description": "Ambil per ID data presensi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Presensi"
+                ],
+                "summary": "Get By ID Data Presensi.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Masukan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Presensi"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/survey": {
+            "get": {
+                "description": "Mengambil semua data survey.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey"
+                ],
+                "summary": "Get All Data Survey.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Survey"
+                        }
+                    }
+                }
+            }
+        },
+        "/survey/{id}": {
+            "get": {
+                "description": "Ambil per ID data survey.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey"
+                ],
+                "summary": "Get By ID Data Survey.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Masukan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Survey"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/upd/{id}": {
+            "put": {
+                "description": "Ubah data presensi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Presensi"
+                ],
+                "summary": "Update data presensi.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Masukan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Payload Body [RAW]",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.Presensi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Presensi"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/update/{id}": {
             "put": {
                 "description": "Ubah data kuesioner.",
@@ -205,9 +530,139 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/updatesurvey/{id}": {
+            "put": {
+                "description": "Ubah data survey.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey"
+                ],
+                "summary": "Update data survey.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Masukan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Payload Body [RAW]",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.Survey"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Survey"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "controller.JamKerja": {
+            "type": "object",
+            "properties": {
+                "durasi": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "gmt": {
+                    "type": "integer",
+                    "example": 7
+                },
+                "hari": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "Senin",
+                        "Selasa",
+                        "Rabu",
+                        "Kamis",
+                        "Jumat",
+                        "Sabtu",
+                        "Minggu"
+                    ]
+                },
+                "jam_keluar": {
+                    "type": "string",
+                    "example": "16:00"
+                },
+                "jam_masuk": {
+                    "type": "string",
+                    "example": "08:00"
+                },
+                "piket_tim": {
+                    "type": "string",
+                    "example": "Piket Z"
+                },
+                "shift": {
+                    "type": "integer",
+                    "example": 2
+                }
+            }
+        },
+        "controller.Karyawan": {
+            "type": "object",
+            "properties": {
+                "hari_kerja": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "Senin",
+                        "Selasa",
+                        "Rabu",
+                        "Kamis",
+                        "Jumat",
+                        "Sabtu",
+                        "Minggu"
+                    ]
+                },
+                "jabatan": {
+                    "type": "string",
+                    "example": "Anonymous"
+                },
+                "jam_kerja": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/controller.JamKerja"
+                    }
+                },
+                "nama": {
+                    "description": "ID          primitive.ObjectID ` + "`" + `bson:\"_id,omitempty\" json:\"_id,omitempty\" example:\"123456789\"` + "`" + `",
+                    "type": "string",
+                    "example": "Tes Swagger"
+                },
+                "phone_number": {
+                    "type": "string",
+                    "example": "08123456789"
+                }
+            }
+        },
         "controller.Kuesioner": {
             "type": "object",
             "properties": {
@@ -238,6 +693,53 @@ const docTemplate = `{
                 }
             }
         },
+        "controller.Presensi": {
+            "type": "object",
+            "properties": {
+                "biodata": {
+                    "$ref": "#/definitions/controller.Karyawan"
+                },
+                "checkin": {
+                    "description": "Datetime     primitive.DateTime ` + "`" + `bson:\"datetime,omitempty\" json:\"datetime,omitempty\"` + "`" + `",
+                    "type": "string",
+                    "example": "MASUK"
+                },
+                "latitude": {
+                    "type": "number",
+                    "example": 123.11
+                },
+                "location": {
+                    "type": "string",
+                    "example": "Bandung"
+                },
+                "longitude": {
+                    "description": "ID           primitive.ObjectID ` + "`" + `bson:\"_id,omitempty\" json:\"_id,omitempty\" example:\"123456789\"` + "`" + `",
+                    "type": "number",
+                    "example": 123.11
+                },
+                "phone_number": {
+                    "type": "string",
+                    "example": "08123456789"
+                }
+            }
+        },
+        "controller.Question": {
+            "type": "object",
+            "properties": {
+                "nomor": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "options": {
+                    "type": "string",
+                    "example": "a.Sukarno b.Jokowi"
+                },
+                "text": {
+                    "type": "string",
+                    "example": "Siapa Presiden pertama Indonesia?"
+                }
+            }
+        },
         "controller.Responden": {
             "type": "object",
             "properties": {
@@ -261,6 +763,22 @@ const docTemplate = `{
                 "usia": {
                     "type": "integer",
                     "example": 18
+                }
+            }
+        },
+        "controller.Survey": {
+            "type": "object",
+            "properties": {
+                "kode": {
+                    "type": "integer",
+                    "example": 101
+                },
+                "soal": {
+                    "$ref": "#/definitions/controller.Question"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Sejarah"
                 }
             }
         }
